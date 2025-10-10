@@ -1,0 +1,79 @@
+// Overlay for the HOPERF RFM70 transceiver.
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target = <&spi0>;
+		__overlay__ {
+			/* needed to avoid dtc warning */
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "okay";
+
+			rfm70_spi0_cs0: rfm70_spi0_cs0@0 {
+				compatible = COMPATIBLE_CS0;
+				reg = <0>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&rfm70_pins_spi0_cs0>;
+				interrupt-parent = <&gpio>;
+				ce-gpios = <&gpio 4 0>; // GPIO_ACTIVE_HIGH
+				interrupts = <5 0x2>; /* falling edge */
+				spi-max-frequency = <1000000>;
+				spi-bits-per-word = <8>;
+				status = "okay";
+			};
+#ifdef COMPATIBLE_CS1
+			rfm70_spi0_cs1: rfm70_spi0_cs1@1 {
+				compatible = COMPATIBLE_CS1;
+				reg = <1>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&rfm70_pins_spi0_cs1>;
+				interrupt-parent = <&gpio>;
+				ce-gpios = <&gpio 6 0>; // GPIO_ACTIVE_HIGH
+				interrupts = <23 0x2>; /* falling edge */
+				spi-max-frequency = <1000000>;
+				spi-bits-per-word = <8>;
+				status = "okay";
+			};
+#endif
+		};
+	};
+
+	fragment@1 {
+		target = <&spidev0>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+#ifdef COMPATIBLE_CS1
+	fragment@2 {
+		target = <&spidev1>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+#endif // COMPATIBLE_CS1
+
+	fragment@3 {
+		target = <&gpio>;
+		__overlay__ {
+			rfm70_pins_spi0_cs0: rfm70_pins_spi0_cs0 {
+				brcm,pins = <5>;
+				brcm,function = <0>; 	// input
+				brcm,pull = <0>; 	// none
+			};
+#ifdef COMPATIBLE_CS1
+			rfm70_pins_spi0_cs1: rfm70_pins_spi0_cs1 {
+				brcm,pins = <23>;
+				brcm,function = <0>; 	// input
+				brcm,pull = <0>; 	// none
+			};
+#endif // COMPATIBLE_CS1
+		};
+	};
+};
