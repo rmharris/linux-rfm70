@@ -18,7 +18,7 @@
 #include <linux/of_device.h>
 #include <linux/completion.h>
 #include <linux/idr.h>
-#include "rfm70.h"
+#include "../include/rfm70.h"
 
 #ifndef DRIVER_VERSION
 #define DRIVER_VERSION "unknown"
