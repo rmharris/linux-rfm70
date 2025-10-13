@@ -10,4 +10,6 @@ BUILT_MODULE_LOCATION[0]="src"
 BUILT_MODULE_NAME[0]="rfm70"
 DEST_MODULE_LOCATION[0]="/updates"
 AUTOINSTALL="yes"
+POST_INSTALL="dkms.post_install.sh"
+POST_REMOVE="dkms.post_remove.sh"
 EOF
