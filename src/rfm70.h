@@ -15,11 +15,11 @@ struct rfm70_config {
 		 */
 		__u8	rx_address[5];
 		/* Enable this pipe? */
-		bool	enable;
+		__u8	enable;
 		/* Enable Auto Acknowledgement for this pipe? */
-		bool	aa;
+		__u8	aa;
 		/* Enable Dynamic Payload Length for this pipe? */
-		bool	dpl;
+		__u8	dpl;
 	} pipes[6];
 	/* The address to which transmissions are sent. */
 	__u8 tx_address[5];

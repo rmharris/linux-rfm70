@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -23,9 +22,9 @@ main(int argc, char **argv)
 		.pipes = {
 			[0] = {
 				.rx_address = { 0x9a, 0x78, 0x56, 0x34, 0x12 },
-				.enable = true,
-				.dpl = true,
-				.aa = true
+				.enable = 1,
+				.dpl = 1,
+				.aa = 1
 			}
 		},
 		.tx_address = { 0x9a, 0x78, 0x56, 0x34, 0x12 },
