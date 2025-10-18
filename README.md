@@ -40,7 +40,7 @@ A permanent installation requires git and dkms:
 ```
 ./dkms.conf.sh
 dkms add .
-dkms build linux-rfm70/v1.0.0
+dkms build linux-rfm70/v1.0.0 # whatever version is reported by the previous command
 dkms install linux-rfm70/v1.0.0
 modprobe rfm70
 ```
